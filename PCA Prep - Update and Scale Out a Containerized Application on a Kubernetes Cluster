@@ -1,0 +1,10 @@
+
+gsutil cp gs://$DEVSHELL_PROJECT_ID/echo-web-v2.tar.gz .
+
+tar -xvzf echo-web-v2.tar.gz
+
+gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/echo-app:v2 .
+
+kubectl edit deploy echo-web
+
+kubectl scale deployment echo-web --replicas=2
